@@ -1,50 +1,52 @@
-# Multi-Vendor eCommerce App
+# 🛒 Multi-Vendor E-commerce Platform
 
-## Backend Setup
+A full-stack eCommerce web application where multiple shop owners can sell products directly to customers without intermediaries.
 
-1. Copy `.env.example` to `.env` in backend/
-2. Update `MONGO_URI` with MongoDB Atlas connection string
-3. Update `JWT_SECRET` (use strong secret)
-4. cd backend && npm install
-5. npm run dev
+## 🚀 Features
 
-**API Base:** http://localhost:5000/api
+* User Authentication (JWT)
+* Role-based access (User, Shop Owner, Admin)
+* Product Management
+* Cart & Order System
+* Search & Filters
+* Wishlist
 
-**Auth:**
-- POST /auth/register {name, email, password, role}
-- POST /auth/login {email, password}
+## 🛠 Tech Stack
 
-**Products:**
-- GET /products?search= &category= &minPrice= &maxPrice= &sort=price:asc&page=1&limit=10
-- GET /products/own (owner)
-- POST /products (owner)
-- PUT /products/:id (owner)
-- DELETE /products/:id (owner)
+* Frontend: HTML, CSS, JavaScript
+* Backend: Node.js, Express.js
+* Database: MongoDB Atlas
 
-**Orders:**
-- POST /orders {products, totalPrice} (user)
-- GET /orders (user)
-- GET /orders/own (owner)
-- PUT /orders/:id/status {status} (owner)
+## ⚙️ Setup Instructions
 
-**Wishlist:**
-- POST /wishlist {productId}
-- DELETE /wishlist/:productId
-- GET /wishlist
+### Backend
 
-**Admin:**
-- GET /users (staff)
-- GET /users/stats (staff)
-- DELETE /users/:id (staff)
+```bash
+cd backend
+npm install
+npm start
+```
 
-## Frontend
+### Frontend
 
-Open `frontend/index.html` in browser (use Live Server extension for CORS).
+Open index.html using Live Server
 
-## Notes
-- Cart/Wishlist use localStorage
-- Role-based UI in dashboard
-- Responsive design mobile-first
-- All APIs have JWT auth protection where needed
-- Stock auto-decrements on order
+## 🔐 Environment Variables
 
+Create `.env` in backend:
+
+```
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_secret
+PORT=5000
+```
+
+## 📸 Screenshots
+
+(Add images here later)
+
+## 🌐 Future Improvements
+
+* Payment Integration
+* Deployment
+* Advanced UI
