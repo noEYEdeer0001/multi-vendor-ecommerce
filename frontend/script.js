@@ -167,3 +167,13 @@ role: document.getElementById('reg-role').value
 
 document.getElementById('add-product-btn')?.addEventListener('click', addProduct);
 });
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.add('hidden');
+  });
+
+  const target = document.getElementById(`${page}-page`);
+  if (target) {
+    target.classList.remove('hidden');
+  }
+}
