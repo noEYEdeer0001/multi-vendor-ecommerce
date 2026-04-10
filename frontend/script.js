@@ -27,31 +27,41 @@ function showLoading(element) {
 
 // API fetch wrapper
 async function apiRequest(endpoint, options = {}) {
-  const token = localStorage.getItem('token');
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers
-    },
-    ...options
-  };
+  let retries = 3;
 
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+  while (retries--) {
+    try {
+      const token = localStorage.getItem('token');
 
-  try {
-    const response = await fetch(`${API_BASE}${endpoint}`, config);
-    const data = await response.json();
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          ...options.headers
+        },
+        ...options
+      };
 
-    if (!response.ok) {
-      throw new Error(data.error || 'Request failed');
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+
+      const response = await fetch(`${API_BASE}${endpoint}`, config);
+
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+
+      return await response.json();
+
+    } catch (error) {
+      if (retries === 0) {
+        showToast("Server waking up... please wait ⏳");
+        throw error;
+      }
+
+      // wait before retry
+      await new Promise(res => setTimeout(res, 2000));
     }
-
-    return data;
-  } catch (error) {
-    showToast(error.message, 'error');
-    throw error;
   }
 }
 
@@ -159,44 +169,78 @@ function showPage(page) {
   }, 300);
 }
 
-
 // Load products
 async function loadProducts(filters = {}) {
   const productsContainer = document.getElementById('products-container');
   const skeleton = document.getElementById('skeleton-products');
+
   if (!productsContainer || !skeleton) return;
+
+  // ✅ show loading message (correct place)
+  productsContainer.innerHTML = "<p>Loading products...</p>";
+
   skeleton.style.display = 'grid';
   showSkeletonLoaders();
-  
+
   try {
     const params = new URLSearchParams(filters);
     const { products } = await apiRequest(`/products?${params}`);
-    
+
     skeleton.style.display = 'none';
     productsContainer.innerHTML = '';
-    
+
+    // ✅ handle empty products
+    if (products.length === 0) {
+      productsContainer.innerHTML = `
+        <div style="text-align:center; padding: 4rem;">
+          <h2>No products available 🛒</h2>
+          <p>Add products as a shop owner</p>
+        </div>
+      `;
+      return;
+    }
+
     products.forEach((product, index) => {
       const card = document.createElement('div');
       card.className = 'product-card';
       card.style.animationDelay = `${index * 0.1}s`;
+
       card.innerHTML = `
-        <img src="${product.image}" alt="${product.name}" class="product-image" onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+        <img src="${product.image}" alt="${product.name}" class="product-image"
+          onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+
         <div class="product-info">
           <h3 class="product-title">${product.name}</h3>
-          <div class="product-price">$${product.price}</div>
+          <div class="product-price">₹${product.price}</div>
           <div class="product-category">${product.category}</div>
-          <div class="product-shop">by ${product.shopOwnerId.name}</div>
+          <div class="product-shop">by ${product.shopOwnerId?.name || 'Shop'}</div>
+
           <div class="product-actions">
-            <button class="btn btn-primary btn-small" onclick="addToCart('${product._id}', '${product.name}', ${product.price})">Add to Cart</button>
-            <button class="btn btn-secondary btn-small" onclick="toggleWishlist('${product._id}')">♥</button>
+            <button class="btn btn-primary btn-small"
+              onclick="addToCart('${product._id}', '${product.name}', ${product.price})">
+              Add to Cart
+            </button>
+
+            <button class="btn btn-secondary btn-small"
+              onclick="toggleWishlist('${product._id}')">
+              ♥
+            </button>
           </div>
         </div>
       `;
+
       productsContainer.appendChild(card);
     });
+
   } catch (error) {
     skeleton.style.display = 'none';
-    productsContainer.innerHTML = '<div style="text-align:center; padding: 4rem; color: var(--text-secondary);"><h2>No products found 😔</h2><p>Try adjusting your search or filters</p></div>';
+
+    productsContainer.innerHTML = `
+      <div style="text-align:center; padding: 4rem;">
+        <h2>Server waking up ⏳</h2>
+        <p>Please wait a few seconds and refresh</p>
+      </div>
+    `;
   }
 }
 
