@@ -1,3 +1,9 @@
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
 :root {
   /* Light mode */
   --bg-primary: #ffffff;
@@ -616,5 +622,73 @@ body {
 
 .section {
   margin-bottom: 3rem;
+}
+/* HERO SECTION */
+.hero {
+text-align: center;
+padding: 3rem 1rem;
+background: linear-gradient(135deg, #4f46e5, #6366f1);
+color: white;
+border-radius: 15px;
+margin-bottom: 2rem;
+}
+
+.hero h1 {
+font-size: 2rem;
+margin-bottom: 0.5rem;
+}
+
+.hero p {
+opacity: 0.9;
+margin-bottom: 1rem;
+}
+
+/* BUTTON IMPROVEMENT */
+.btn {
+border-radius: 12px;
+transition: 0.25s ease;
+}
+
+.btn:hover {
+transform: translateY(-2px);
+}
+
+/* PRODUCT CARD ENHANCED */
+.product-card {
+border: 1px solid var(--border);
+}
+
+.product-actions button:hover {
+transform: scale(1.05);
+}
+
+/* PAGE ANIMATION */
+.page {
+animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+from {
+opacity: 0;
+transform: translateY(10px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+/* SEARCH ROUND */
+.search-input {
+border-radius: 50px;
+}
+
+/* THEME BUTTON */
+.theme-toggle {
+background: white;
+color: black;
+border-radius: 50%;
+padding: 8px;
+cursor: pointer;
 }
 

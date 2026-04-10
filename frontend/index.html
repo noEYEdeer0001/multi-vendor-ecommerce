@@ -1,156 +1,128 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Multi-Vendor eCommerce</title>
+  <title>ShopEase - Multi-Vendor eCommerce</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <!-- Navbar -->
+
   <nav class="navbar">
     <div class="nav-container container">
-      <div class="logo">eCommerce</div>
-      <ul class="nav-links">
-        <li><a href="#" onclick="showPage('home')">Home</a></li>
-        <li><a href="#" onclick="showPage('cart')">Cart (<span id="cart-count">0</span>)</a></li>
-        <li><a href="#" onclick="showPage('wishlist')">Wishlist</a></li>
-        <li><a href="#" onclick="showPage('orders')">Orders</a></li>
-        <li><a href="#" onclick="showPage('dashboard')">Dashboard</a></li>
-      </ul>
-      <div id="auth-section" class="auth-buttons">
-        <button class="btn btn-secondary" onclick="showPage('login')">Login</button>
-        <button class="btn btn-primary" onclick="showPage('register')">Register</button>
-      </div>
-      <div id="user-section" class="role-info hidden">
-        <span id="user-name"></span> (<span id="user-role"></span>)
-        <button class="btn btn-danger" onclick="logoutUser()">Logout</button>
-        <button id="theme-toggle" class="theme-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">🌙</button>
-      </div>
-      <div class="mobile-menu-toggle" id="mobile-menu-toggle">
-        <span class="hamburger"></span>
-        <span class="hamburger"></span>
-        <span class="hamburger"></span>
-      </div>
-    </div>
+      <div class="logo">🛒 ShopEase</div>
+
+```
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')">Home</a></li>
+    <li><a href="#" onclick="showPage('cart')">Cart (<span id="cart-count">0</span>)</a></li>
+    <li><a href="#" onclick="showPage('wishlist')">Wishlist</a></li>
+    <li><a href="#" onclick="showPage('orders')">Orders</a></li>
+    <li><a href="#" onclick="showPage('dashboard')">Dashboard</a></li>
+  </ul>
+
+  <div id="auth-section" class="auth-buttons">
+    <button class="btn btn-secondary" onclick="showPage('login')">Login</button>
+    <button class="btn btn-primary" onclick="showPage('register')">Register</button>
+  </div>
+
+  <div id="user-section" class="role-info hidden">
+    <span id="user-name"></span> (<span id="user-role"></span>)
+    <button class="btn btn-danger" onclick="logoutUser()">Logout</button>
+    <button id="theme-toggle" class="theme-toggle" onclick="toggleDarkMode()">🌙</button>
+  </div>
+</div>
+```
+
   </nav>
 
   <!-- Home Page -->
+
   <div id="home-page" class="page">
     <div class="container">
-      <div class="search-container">
-        <div class="search-bar">
-          <input type="text" id="search-input" class="search-input" placeholder="Search products...">
-          <button class="btn btn-primary" id="search-btn" onclick="applyFilters()">Search</button>
-        </div>
-        <div class="filter-group">
-          <input type="number" id="min-price" class="filter-input" placeholder="Min Price">
-          <input type="number" id="max-price" class="filter-input" placeholder="Max Price">
-          <select id="category-filter" class="filter-input">
-            <option value="">All Categories</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Clothing">Clothing</option>
-            <option value="Books">Books</option>
-          </select>
-          <select id="sort-select" class="filter-input">
-            <option value="price:asc">Price Low to High</option>
-            <option value="price:desc">Price High to Low</option>
-            <option value="createdAt:desc">Newest</option>
-          </select>
-        </div>
-      </div>
-      <div id="skeleton-products" class="products-grid" style="display:none;"></div>
-      <div id="products-container" class="products-grid"></div>
+
+```
+  <!-- HERO SECTION -->
+  <div class="hero">
+    <h1>Find Your Perfect Products</h1>
+    <p>Shop from trusted sellers at the best prices</p>
+    <button class="btn btn-primary">Explore Now</button>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-container">
+    <div class="search-bar">
+      <input type="text" id="search-input" class="search-input" placeholder="Search products...">
+      <button class="btn btn-primary" onclick="applyFilters()">Search</button>
+    </div>
+
+    <div class="filter-group">
+      <input type="number" id="min-price" class="filter-input" placeholder="Min Price">
+      <input type="number" id="max-price" class="filter-input" placeholder="Max Price">
+
+      <select id="category-filter" class="filter-input">
+        <option value="">All Categories</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Books">Books</option>
+      </select>
+
+      <select id="sort-select" class="filter-input">
+        <option value="price:asc">Price Low to High</option>
+        <option value="price:desc">Price High to Low</option>
+      </select>
     </div>
   </div>
 
-  <!-- Login Page -->
-  <div id="login-page" class="page hidden">
-      <div class="form-container">
-        <h2>Login</h2>
-        <form id="login-form">
-          <div class="form-group">
-            <input type="email" id="login-email" class="form-input" placeholder="Email" required>
-          </div>
-          <div class="form-group">
-            <input type="password" id="login-password" class="form-input" placeholder="Password" required>
-          </div>
-          <button type="submit" class="btn btn-primary" style="width:100%">Login</button>
-        </form>
-        <p style="text-align:center; margin-top:1rem">Don't have account? <a href="#" onclick="showPage('register')">Register</a></p>
-      </div>
+  <div id="skeleton-products" class="products-grid" style="display:none;"></div>
+  <div id="products-container" class="products-grid"></div>
+
+</div>
+```
+
   </div>
 
-  <!-- Register Page -->
-  <div id="register-page" class="page hidden">
+  <!-- Login Page -->
+
+  <div id="login-page" class="page hidden">
     <div class="form-container">
-      <h2>Register</h2>
-      <form id="register-form">
-        <div class="form-group">
-          <input type="text" id="reg-name" class="form-input" placeholder="Name" required>
-        </div>
-        <div class="form-group">
-          <input type="email" id="reg-email" class="form-input" placeholder="Email" required>
-        </div>
-        <div class="form-group">
-          <input type="password" id="reg-password" class="form-input" placeholder="Password" required>
-        </div>
-        <div class="form-group">
-          <select id="reg-role" class="form-input">
-            <option value="user">Customer</option>
-            <option value="shopOwner">Shop Owner</option>
-            <option value="staff">Admin</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%">Register</button>
+      <h2>Login</h2>
+      <form id="login-form">
+        <input type="email" id="login-email" class="form-input" placeholder="Email" required>
+        <input type="password" id="login-password" class="form-input" placeholder="Password" required>
+        <button type="submit" class="btn btn-primary">Login</button>
       </form>
     </div>
   </div>
 
-  <!-- Cart Page -->
-  <div id="cart-page" class="page hidden">
-    <div class="container">
-      <h1>Shopping Cart</h1>
-      <div id="cart-items"></div>
-      <div style="text-align:center; margin-top:2rem">
-        <h3>Total: $<span id="cart-total">0</span></h3>
-        <button id="checkout-btn" class="btn btn-success" onclick="checkout()">Checkout</button>
-        <button onclick="showPage('home')" class="btn btn-secondary">Continue Shopping</button>
-      </div>
-      <button class="btn btn-primary" onclick="loadCart()" id="load-cart">Load Cart</button>
-    </div>
-  </div>
+  <!-- Register Page -->
 
-  <!-- Wishlist Page -->
-  <div id="wishlist-page" class="page hidden">
-    <div class="container">
-      <h1>Wishlist</h1>
-      <div id="wishlist-items"></div>
-      <button class="btn btn-primary" onclick="loadWishlist()" id="load-wishlist">Refresh</button>
-    </div>
-  </div>
+  <div id="register-page" class="page hidden">
+    <div class="form-container">
+      <h2>Create Account</h2>
+      <form id="register-form">
+        <input type="text" id="reg-name" class="form-input" placeholder="Name" required>
+        <input type="email" id="reg-email" class="form-input" placeholder="Email" required>
+        <input type="password" id="reg-password" class="form-input" placeholder="Password" required>
 
-  <!-- Orders Page -->
-  <div id="orders-page" class="page hidden">
-    <div class="container">
-      <h1>My Orders</h1>
-      <div id="orders-list"></div>
-      <button class="btn btn-primary" onclick="loadOrders()" id="load-orders">Refresh</button>
-    </div>
-  </div>
+```
+    <select id="reg-role" class="form-input">
+      <option value="user">Customer</option>
+      <option value="shopOwner">Shop Owner</option>
+      <option value="staff">Admin</option>
+    </select>
 
-  <!-- Dashboard Page -->
-  <div id="dashboard-page" class="page hidden">
-    <div class="container">
-      <h1>Dashboard</h1>
-      <div id="dashboard-content">
-        <!-- Role-specific content -->
-      </div>
-      <button class="btn btn-primary" onclick="loadDashboard()">Refresh Dashboard</button>
-    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+</div>
+```
+
   </div>
 
   <script src="script.js"></script>
+
 </body>
 </html>
-
