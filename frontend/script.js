@@ -1,6 +1,6 @@
 // Frontend JavaScript - API utils, localStorage, UI logic
 
-const API_BASE = 'https://multi-vendor-ecommerce-qr2y.onrender.com';
+const API_BASE = 'https://multi-vendor-ecommerce-qr2y.onrender.com/api';
 let currentUser = null;
 let currentRole = null;
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
